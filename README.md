@@ -1,5 +1,14 @@
 # EKS-Cluster-latest
 
+# Creating EKS Cluster
+
+Apply the terraform code in the repo by changing the subnet ids and security group ids as per your aws account.
+
+**EKS cluster connection command**
+```bash
+aws eks --region us-east-1 update-kubeconfig --name <cluster-name>
+```
+
 # Creating a Pod in Kubernetes
 
 To create a pod in Kubernetes, follow these steps:
