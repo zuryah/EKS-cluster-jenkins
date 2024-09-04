@@ -1,0 +1,56 @@
+name: Terraform Daily Apply and Destroy
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  schedule:
+    # Run at 8:00 PM IST daily (2:30 PM UTC)
+    - cron: "30 14 * * *"
+    # Run at 10:00 PM IST daily (4:30 PM UTC)
+    - cron: "30 16 * * *"
+
+jobs:
+  terraform_apply:
+    name: Apply Terraform
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' && github.event.schedule == '30 14 * * *'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.11
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # Add other environment variables as necessary
+
+  terraform_destroy:
+    name: Destroy Terraform
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' && github.event.schedule == '30 16 * * *'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.11
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Destroy Terraform
+        run: terraform destroy -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # Add other environment variables as necessary
