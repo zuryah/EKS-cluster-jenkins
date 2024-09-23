@@ -71,7 +71,7 @@ resource "aws_eks_cluster" "eks-cluster1" {
 }
 
 # EKS Node Group
-resource "aws_eks_node_group" "k8-cluster-node-group" {
+resource "aws_eks_node_group" "k8-cluster-node-group1" {
   cluster_name    = aws_eks_cluster.eks-cluster1.name
   node_group_name = "k8-cluster-node-group1"
   node_role_arn   = aws_iam_role.node-role.arn
