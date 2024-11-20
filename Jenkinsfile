@@ -19,7 +19,7 @@ pipeline {
                     // Use withCredentials for git_PAT
                     withCredentials([string(credentialsId: 'git_PAT', variable: 'GIT_PAT')]) {
                         sh """
-                        git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git"
+                        git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git
                            """
                     }
                 }
