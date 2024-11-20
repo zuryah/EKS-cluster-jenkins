@@ -13,7 +13,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout SCM') 
             steps {
                 script {
                     // Use withCredentials for git_PAT
@@ -24,7 +24,7 @@ pipeline {
                     }
                 }
             }
-        }
+        
 
         stage('Terraform Init') {
             steps {
