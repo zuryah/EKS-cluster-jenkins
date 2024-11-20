@@ -16,9 +16,9 @@ pipeline {
         stage('Checkout SCM') {
             steps {
                 script {
-                    // Use withCredentials for ROOT(RED)
-                    withCredentials([string(credentialsId: 'root-red', variable: 'ROOT_RED')]) {
-                        sh "git clone https://$ROOT_RED@github.com/zuryah/EKS-cluster-jenkins.git"
+                    // Use withCredentials for git_PAT
+                    withCredentials([string(credentialsId: 'git_PAT', variable: 'GIT_PAT')]) {
+                        sh "git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git"
                     }
                 }
             }
