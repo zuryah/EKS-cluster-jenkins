@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Use withCredentials for git_PAT
-                    withCredentials([string(credentialsId: 'git_pat', variable: 'GIT_PAT')]) {
+                    withCredentials([string(credentialsId: 'git_PAT', variable: 'GIT_PAT')]) {
                         sh """
                         git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git
                            """
@@ -32,9 +32,8 @@ pipeline {
                 script {
                     // Initialize Terraform with AWS credentials
                     dir('EKS-cluster-jenkins') {
-                        withCredentials([
-                            string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
-                            string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')])  
+                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
+                                         string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')])  
                             {
                             sh 'terraform init'
                         }
