@@ -6,7 +6,8 @@ pipeline {
         string(name: 'USERNAME_NAME', defaultValue: 'surya', description: 'Who is running the pipeline')
     }
 
-    environment {
+    environment 
+    {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'us-west-2c'
@@ -17,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Use withCredentials for git_PAT
-                    withCredentials([string(credentialsId: 'git_PAT', variable: 'GIT_PAT')]) {
+                    withCredentials([string(credentialsId: 'git_pat', variable: 'GIT_PAT')]) {
                         sh """
                         git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git"
                         """
