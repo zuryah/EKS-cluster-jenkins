@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EKS-Cluster-latest
 
 # Creating EKS Cluster
@@ -49,3 +50,6 @@ Here are some frequently used `kubectl` commands for working with pods:
     ```bash
     kubectl describe pod <pod_name>
     ```
+=======
+# EKS-cluster-jenkins
+>>>>>>> ed4ceb8161368ed9b60fde25326c36c8c60b8269
