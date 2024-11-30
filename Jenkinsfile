@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         choice(name: 'TERRAFORM_ACTION', choices: ['plan', 'apply', 'destroy'], description: 'Select Terraform action')
-        string(name: 'USERNAME_NAME', defaultValue: 'surya', description: 'Who is running the pipeline')
+        string(name: 'USER_NAME', defaultValue: 'surya', description: 'Who is running the pipeline')
     }
 
     environment 
@@ -14,26 +14,26 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
                 script {
                     // Use withCredentials for git_PAT
-                    withCredentials([string(credentialsId: 'git_pat', variable: 'GIT_PAT')]) {
+                    withCredentials([string(credentialsId: 'git_PAT', variable: 'GIT_PAT')]) {
                         sh """
-                        git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git"
-                        """
+                        git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git
+                           """
+                        }
                     }
                 }
             }
-        }
 
-        stage('Terraform Init') {
-            steps {
-                script {
+            stage('Terraform Init') {
+                steps {
+                    script {
                     // Initialize Terraform with AWS credentials
-                    dir('EKS-cluster-jenkins') {
-                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
-                                         string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        dir('EKS-cluster-jenkins') {    
+                    
+                        {
                             sh 'terraform init'
                         }
                     }
@@ -76,3 +76,7 @@ pipeline {
         buildDiscarder(logrotator(numToKeepStr: '10'))
     }
 }
+
+
+   
+       
