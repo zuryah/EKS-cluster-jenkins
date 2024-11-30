@@ -14,7 +14,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
+        stage('Checkout') {
             steps {
                 script {
                     // Use withCredentials for git_PAT
