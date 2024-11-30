@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         choice(name: 'TERRAFORM_ACTION', choices: ['plan', 'apply', 'destroy'], description: 'Select Terraform action')
-        string(name: 'USERNAME_NAME', defaultValue: 'surya', description: 'Who is running the pipeline')
+        string(name: 'USER_NAME', defaultValue: 'surya', description: 'Who is running the pipeline')
     }
 
     environment 
