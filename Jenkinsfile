@@ -22,19 +22,18 @@ pipeline {
                         sh """
                         git clone https://$GIT_PAT@github.com/zuryah/EKS-cluster-jenkins.git
                            """
+                        }
                     }
                 }
             }
-        }
 
-        stage('Terraform Init') {
-            steps {
-                script {
+            stage('Terraform Init') {
+                steps {
+                    script {
                     // Initialize Terraform with AWS credentials
-                    dir('EKS-cluster-jenkins') {
-                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
-                                         string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')])  
-                            {
+                        dir('EKS-cluster-jenkins') {    
+                    
+                        {
                             sh 'terraform init'
                         }
                     }
