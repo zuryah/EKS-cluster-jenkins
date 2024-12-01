@@ -38,6 +38,7 @@ pipeline {
                                 string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
                         ])  {
                             // Run terraform init in the specified directory
+                            credentials -> 
                             sh '''
                             terraform init
                             '''
