@@ -35,16 +35,16 @@ pipeline {
                     // Initialize Terraform with AWS credentials
                         dir('EKS-cluster-jenkins') {    
                             withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID')
-                                             string(credentialsId: 'aws-secret-access-key', variable: ' AWS_SECRET_ACCESS_KEY')]) {
+                                             string(credentialsId: 'aws-secret-access-key', variable: ' AWS_SECRET_ACCESS_KEY')])  } 
+                            {
                             sh 'terraform init'
                             }
                         }
                     }
-                }
 
-                 stage('Terraform Action') {
-                    steps {
-                        script {
+                    stage('Terraform Action') {
+                        steps {
+                            script {
                        // Perform the selected Terraform action
                             if (params.TERRAFORM_ACTION == 'apply') {
                                 dir('EKS-cluster-jenkins') {
