@@ -33,14 +33,14 @@ pipeline {
             stage('Terraform Init') {
                 steps {
                     dir('EKS-cluster-jenkins') {
-                        withCredentials([
+                         withCredentials([
                                 string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
                                 string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')
-                        ]) {
+                        ])  {
+                            // Run terraform init in the specified directory
                             sh '''
-                             // Run terraform init in the specified directory
                             terraform init
-                               '''
+                            '''
                         }
                     }
                 }
